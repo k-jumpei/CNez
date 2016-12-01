@@ -1,0 +1,20 @@
+Ops = ('L' [0-9]+)? { $(Op)? $(__ Op)* #Ops }
+Op = { $opname(Basic/Matching/AST/Symbol) (_ $arg(Arg) $arg(_ Arg)*)*#Op }
+/*Op=Matching/Basic/AST/Symbol/ReadRepeat/Memorization*/
+Basic={('nop'/'exit'/'alt'/'succ'/'jump'/'ret'/'back'/'pos'/'move'/'call'/'step'/'fail')#Basic}
+Matching = {('byte'/'nbyte'/'rbyte'/'obyte'/'set'/'rset'/'nset'/'oset'/'str'/'rstr'/'nstr'/'ostr'/'nany'/'any') #Matching}
+AST={('tbegin'/'tend'/'ttag'/'tlink'/'treplace'/'tfold'/'tpush'/'tpop')#AST}
+Symbol={('sopen'/'sclose'/'sdef'/'sis'/'sisa'/'sexists'/'smask'/'smatch'/'sisdef')#Symbol}
+//Args = {$arg(Arg) $arg(_ Arg)*}
+Arg = Int/Line/String/Table/ Tag/Label
+Int = {[0-9]+ #Int}
+Line='L'{[0-9]+#Line}
+Table={[0-9a-zA-Z]+ #Table}
+Tag = '#' String
+Label = '$' String
+String = '"'? {[a-zA-Z]+#Str} '"'?
+
+S = [ \t]
+NL = '\n'
+_ = S*
+__ = (S / NL)*
