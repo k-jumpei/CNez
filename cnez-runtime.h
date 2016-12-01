@@ -1,3 +1,6 @@
+#ifndef CNEZ_RUNTIME_H
+#define CNEZ_RUNTIME_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1090,3 +1093,5 @@ void cnez_dump(void *v, FILE *fp)
 // size_t          stack_size;
 // size_t          unused_stack;
 // size_t          fail_stack;
+
+#endif

@@ -1,5 +1,6 @@
 #ifndef VM_H
 #define VM_H
+#include "cnez-runtime.h"
 
 enum nezvm_opcode {
   Byte,
@@ -60,6 +61,13 @@ typedef struct Instruction {
   int arg;
 
 } Instruction;
+
+typedef struct VM_Context {
+  Instruction* inst;
+  int instSize;
+  ParserContext *ctx;
+  
+} VM_Context;
 
 void initVM(ParserContext *pc);
 void print_stack(Wstack s);
