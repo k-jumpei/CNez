@@ -1,7 +1,7 @@
 #ifndef VM_H
 #define VM_H
 #include <stdlib.h>
-#include "parser-context.h"
+#include "cnez-runtime.h"
 
 enum nezvm_opcode {
   Byte,
