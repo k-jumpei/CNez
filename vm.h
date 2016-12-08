@@ -1,6 +1,7 @@
 #ifndef VM_H
 #define VM_H
-#include "cnez-runtime.h"
+#include <stdlib.h>
+#include "parser-context.h"
 
 enum nezvm_opcode {
   Byte,
@@ -12,6 +13,7 @@ enum nezvm_opcode {
   RSet,
   NSet,
   OSet,
+
   Str,
   RStr,
   NStr,
@@ -25,6 +27,8 @@ enum nezvm_opcode {
   TReplace,
   TFold,
   TEnd,
+  TPush,
+  TPop,
 
   Nop,
   Exit,
@@ -35,8 +39,6 @@ enum nezvm_opcode {
   Back,
   Pos,
   Move,
-  TPush,
-  TPop,
   Call,
   Step,
   False,
@@ -66,7 +68,7 @@ typedef struct VM_Context {
   Instruction* inst;
   int instSize;
   ParserContext *ctx;
-  
+
 } VM_Context;
 
 void initVM(ParserContext *pc);

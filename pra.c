@@ -46,9 +46,6 @@ int main(int argc, char const *argv[]) {
   const unsigned char symbol[8][8]={"a","aa","aaa"};
 
 
-  symbol_t p="Var";
-  size_t val;
-
 
   printf("Please input text.\n");
 
@@ -178,89 +175,89 @@ int main(int argc, char const *argv[]) {
 // op='*' #Mul /'/' #Div
 //
 // Int ={('1')#Int}
-  //
-  // inst->op=Call;
-  // inst->arg=3;
-  // inst++;
-  // inst->op=Jump;
-  // inst->arg=23;
-  // inst++;
-  // inst->op=Alt;
-  // inst->arg=21;
-  // inst++;
-  // inst->op=TFold;
-  // inst->arg=0;
-  // inst++;
-  // inst->op=TFold;//labels[0]=left
-  // inst->arg=0;
-  // inst++;
-  // inst->op=Alt;
-  // inst->arg=18;
-  // inst++;
-  // inst->op=Byte;
-  // inst->arg=42;
-  // inst++;
-  // inst->op=TTag;
-  // inst->arg=3;
-  // inst++;
-  // inst->op=Succ;
-  // inst++;
-  // inst->op=TPush;
-  // inst++;
-  // //10
-  // inst->op=Call;
-  // inst->arg=13;
-  // inst++;
-  //
-  // inst->op=Jump;
-  // inst->arg=23;
-  // inst++;
-  // inst->op=TLink;
-  // inst->arg=1;//labels[1]=right
-  // inst++;
-  //
-  // inst->op=TEnd;
-  // inst->arg=0;
-  // inst++;
-  // inst->op=TEnd;
-  // inst->arg=-1;
-  // inst++;
-  // inst->op=Step;
-  // inst++;
-  // inst->op=Jump;
-  // inst->arg=4;
-  // inst++;
-  // inst->op=Byte;
-  // inst->arg=47;
-  // inst++;
-  // inst->op=TTag;
-  // inst->arg=4;
-  // inst++;
-  // inst->op=Jump;
-  // inst->arg=10;
-  // inst++;
-  //
-  // //20
-  // inst->op=Byte;
-  // inst->arg=97;
-  // inst++;
-  // inst->op=Ret;
-  // inst++;
-  // inst->op=Byte;
-  // inst->arg=49;
-  // inst++;
-  //
-  // inst->op=TBegin;
-  // inst->arg=-1;
-  // inst++;
-  // inst->op=TEnd;
-  // inst->arg=0;
-  // inst++;
-  // inst->op=TEnd;
-  // inst->arg=6;
-  // inst++;
-  // inst->op=Ret;
-  // inst++;
+//
+// inst->op=Call;
+// inst->arg=3;
+// inst++;
+// inst->op=Jump;
+// inst->arg=23;
+// inst++;
+// inst->op=Alt;
+// inst->arg=21;
+// inst++;
+// inst->op=TFold;
+// inst->arg=0;
+// inst++;
+// inst->op=TFold;//labels[0]=left
+// inst->arg=0;
+// inst++;
+// inst->op=Alt;
+// inst->arg=18;
+// inst++;
+// inst->op=Byte;
+// inst->arg=42;
+// inst++;
+// inst->op=TTag;
+// inst->arg=3;
+// inst++;
+// inst->op=Succ;
+// inst++;
+// inst->op=TPush;
+// inst++;
+// //10
+// inst->op=Call;
+// inst->arg=13;
+// inst++;
+//
+// inst->op=Jump;
+// inst->arg=23;
+// inst++;
+// inst->op=TLink;
+// inst->arg=1;//labels[1]=right
+// inst++;
+//
+// inst->op=TEnd;
+// inst->arg=0;
+// inst++;
+// inst->op=TEnd;
+// inst->arg=-1;
+// inst++;
+// inst->op=Step;
+// inst++;
+// inst->op=Jump;
+// inst->arg=4;
+// inst++;
+// inst->op=Byte;
+// inst->arg=47;
+// inst++;
+// inst->op=TTag;
+// inst->arg=4;
+// inst++;
+// inst->op=Jump;
+// inst->arg=10;
+// inst++;
+//
+// //20
+// inst->op=Byte;
+// inst->arg=97;
+// inst++;
+// inst->op=Ret;
+// inst++;
+// inst->op=Byte;
+// inst->arg=49;
+// inst++;
+//
+// inst->op=TBegin;
+// inst->arg=-1;
+// inst++;
+// inst->op=TEnd;
+// inst->arg=0;
+// inst++;
+// inst->op=TEnd;
+// inst->arg=6;
+// inst++;
+// inst->op=Ret;
+// inst++;
 
   // START = <symbol NAME> S <symbol NAME> <is NAME> !.
   // NAME = 'A'+
@@ -271,65 +268,65 @@ int main(int argc, char const *argv[]) {
 // T1 = 'a'
 // T2 = 'b'
 //
-  //
-  // inst->op=TBegin;
-  // inst->arg=0;
-  // inst++;
-  // inst->op=SOpen;
-  // inst++;
-  // inst->op=Pos;
-  // inst++;
-  // inst->op=Byte;
-  // inst->arg=97;
-  // inst++;
-  // inst->op=SDef;
-  // inst->arg=1;
-  // inst++;
-  // inst->op=Pos;
-  // inst++;
-  // inst->op=Byte;
-  // inst->arg=98;
-  // inst++;
-  // inst->op=SDef;
-  // inst->arg=2;
-  // inst++;
-  // inst->op=SClose;
-  // inst++;
-  // inst->op=Alt;
-  // inst->arg=14;
-  // inst++;
-  // //10
-  //
-  // inst->op=SExists;
-  // inst->arg=1;
-  // inst++;
-  // inst->op=Succ;
-  // inst++;
-  // inst->op=Fail;
-  // inst++;
-  // inst->op=Alt;
-  // inst->arg=18;
-  // inst++;
-  // inst->op=SExists;
-  // inst->arg=2;
-  // inst++;
-  // inst->op=Succ;
-  // inst++;
-  // inst->op=Fail;
-  // inst++;
-  // inst->op=Byte;
-  // inst->arg=99;
-  // inst++;
-  // inst->op=TEnd;
-  // inst->arg=0;
-  // inst++;
-  // inst->op=TEnd;
-  // inst->arg=7;
-  // inst++;
-  // //20
-  //
-  // inst->op=Ret;
-  // inst++;
+//
+// inst->op=TBegin;
+// inst->arg=0;
+// inst++;
+// inst->op=SOpen;
+// inst++;
+// inst->op=Pos;
+// inst++;
+// inst->op=Byte;
+// inst->arg=97;
+// inst++;
+// inst->op=SDef;
+// inst->arg=1;
+// inst++;
+// inst->op=Pos;
+// inst++;
+// inst->op=Byte;
+// inst->arg=98;
+// inst++;
+// inst->op=SDef;
+// inst->arg=2;
+// inst++;
+// inst->op=SClose;
+// inst++;
+// inst->op=Alt;
+// inst->arg=14;
+// inst++;
+// //10
+//
+// inst->op=SExists;
+// inst->arg=1;
+// inst++;
+// inst->op=Succ;
+// inst++;
+// inst->op=Fail;
+// inst++;
+// inst->op=Alt;
+// inst->arg=18;
+// inst++;
+// inst->op=SExists;
+// inst->arg=2;
+// inst++;
+// inst->op=Succ;
+// inst++;
+// inst->op=Fail;
+// inst++;
+// inst->op=Byte;
+// inst->arg=99;
+// inst++;
+// inst->op=TEnd;
+// inst->arg=0;
+// inst++;
+// inst->op=TEnd;
+// inst->arg=7;
+// inst++;
+// //20
+//
+// inst->op=Ret;
+// inst++;
 
   // File =  <symbol T1> <symbol T2 > <exists T1 'a'> <exists T2> 'c' #File
   // T1 = 'a'+
