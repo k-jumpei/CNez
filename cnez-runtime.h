@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-
+#include "VMloader.h"
 #include "parser-context.h"
 
 #ifdef CNEZ_NOGC
@@ -69,11 +69,14 @@ typedef struct Wstack {
 static Wstack *unusedStack(ParserContext *c)
 {
   if (c->stack_size == c->unused_stack) {
+Wstack work= *(c->stacks + c->unused_stack);
+
     Wstack *newstack = (Wstack *)_calloc(c->stack_size * 2, sizeof(struct Wstack));
     memcpy(newstack, c->stacks, sizeof(struct Wstack) * c->stack_size);
     _free(c->stacks);
     c->stacks = newstack;
     c->stack_size *= 2;
+    *(c->stacks + c->unused_stack)=work;
   }
   c->unused_stack++;
   Wstack *s = c->stacks + c->unused_stack;
@@ -231,7 +234,7 @@ void LINK(void *parent, size_t n, symbol_t label, void *child, void *thunk)
 #endif
 }
 
-void cnez_free(void *t)
+static void cnez_free(void *t)
 {
   GC(t, -1, NULL);
 }
@@ -315,7 +318,7 @@ static ParserContext *ParserContext_new(const unsigned char *text, size_t len)
   c->logs = (struct TreeLog*) _calloc(c->log_size, sizeof(struct TreeLog));
   c->unused_log = 0;
   // stack
-  c->stack_size = 64;
+  c->stack_size = 256;
   c->stacks = (struct Wstack*) _calloc(c->stack_size, sizeof(struct Wstack));
   c->unused_stack = 0;
   c->fail_stack   = 0;
@@ -514,7 +517,7 @@ void _log(ParserContext *c, int op, void *value, struct Tree *tree)
   c->unused_log++;
 }
 
-void cnez_dump(void *v, FILE *fp);
+static void cnez_dump(void *v, FILE *fp);
 
 static
 void DEBUG_dumplog(ParserContext *c)
@@ -716,8 +719,9 @@ static int ParserContext_exists(ParserContext *c, symbol_t table)
   long i;
   for (i = c->tableSize - 1; i >= 0; i--) {
     SymbolTableEntry * entry = c->tables + i;
-    if (entry->table == table) {
-      return entry->symbol != NullSymbol;
+    if(strcmp(entry->table , table)==0){
+return !(strcmp(entry->symbol , NullSymbol)==0);
+      // return entry->symbol != NullSymbol;
     }
   }
   return 0;
@@ -728,8 +732,8 @@ static int ParserContext_existsSymbol(ParserContext *c, symbol_t table, const un
   long i;
   for (i = c->tableSize - 1; i >= 0; i--) {
     SymbolTableEntry * entry = c->tables + i;
-    if (entry->table == table) {
-      if (entry->symbol == NullSymbol) {
+    if(strcmp(entry->table , table)==0){
+          if(strcmp(entry->symbol , NullSymbol)==0){
         return 0;                         // masked
       }
       if (entry->length == length && memcmp(entry->symbol, symbol, length) == 0) {
@@ -745,8 +749,10 @@ static int ParserContext_matchSymbol(ParserContext *c, symbol_t table)
   long i;
   for (i = c->tableSize - 1; i >= 0; i--) {
     SymbolTableEntry * entry = c->tables + i;
-    if (entry->table == table) {
-      if (entry->symbol == NullSymbol) {
+    // if (entry->table == table) {
+    if(strcmp(entry->table , table)==0){
+      if(strcmp(entry->symbol , NullSymbol)==0){
+      // if (entry->symbol == NullSymbol) {
         return 0;                         // masked
       }
       return ParserContext_match(c, entry->symbol, entry->length);
@@ -760,9 +766,8 @@ static int ParserContext_equals(ParserContext *c, symbol_t table, const unsigned
   size_t length = c->pos - ppos;
   for (i = c->tableSize - 1; i >= 0; i--) {
     SymbolTableEntry * entry = c->tables + i;
-    if (entry->table == table) {
-      if (entry->symbol == NullSymbol) {
-        return 0;                         // masked
+    if (strcmp(entry->table , table)==0) {
+      if(strcmp(entry->symbol , NullSymbol)==0){        return 0;                         // masked
       }
       return (entry->length == length && memcmp(entry->symbol, ppos, length) == 0);
     }
@@ -776,9 +781,8 @@ static int ParserContext_contains(ParserContext *c, symbol_t table, const unsign
   size_t length = c->pos - ppos;
   for (i = c->tableSize - 1; i >= 0; i--) {
     SymbolTableEntry * entry = c->tables + i;
-    if (entry->table == table) {
-      if (entry->symbol == NullSymbol) {
-        return 0;                         // masked
+    if (strcmp(entry->table , table)==0) {
+      if(strcmp(entry->symbol , NullSymbol)==0){        return 0;                         // masked
       }
       if (length == entry->length && memcmp(ppos, entry->symbol, length) == 0) {
         return 1;
@@ -1007,7 +1011,84 @@ static inline int ParserContext_bitis(ParserContext *c, int *bits, size_t n)
 // }
 
 
-void cnez_dump(void *v, FILE *fp)
+static void cnez_dump(void *v, FILE *fp)
+{
+  size_t i;
+  Tree *t = (Tree*)v;
+  if(t == NULL) {
+    fputs("null", fp);
+    return;
+  }
+//	if(t->refc != 1) {
+//		fprintf(fp, "@%ld", t->refc);
+//	}
+fputs("[#", fp);
+fputs(_tags[(int)t->tag], fp);
+
+
+  if(t->size == 0) {
+    fputs(" '", fp);
+    for(i = 0; i < t->len; i++) {
+      fputc(t->text[i], fp);
+    }
+
+    fputs("'", fp);
+  }
+  else {
+    for(i = 0; i < t->size; i++) {
+
+      if((int)t->labels[i] != 0) {
+
+        fputs("$", fp);
+        fputs(_labels[(int)t->labels[i]], fp);
+        fputs("=", fp);
+      }
+      cnez_dump(t->childs[i], fp);
+    }
+  }
+  fputs("]\n", fp);
+
+}
+
+
+static void cnez_dump2(void *v, FILE *fp)
+{
+
+  size_t i;
+  Tree *t = (Tree*)v;
+  if(t == NULL) {
+    fputs("null", fp);
+    return;
+  }
+//	if(t->refc != 1) {
+//		fprintf(fp, "@%ld", t->refc);
+//	}
+  fputs("[#", fp);
+  fputs(_tags[(int)t->tag], fp);
+  if(t->size == 0) {
+    fputs(" '", fp);
+    for(i = 0; i < t->len; i++) {
+      fputc(t->text[i], fp);
+
+    }
+    fputs("'", fp);
+  }
+  else {
+    for(i = 0; i < t->size; i++) {
+      fputs(" ", fp);
+
+      if((int)t->labels[i] != 0) {
+        fputs("$", fp);
+        fputs(_labels[(int)t->labels[i]], fp);
+        fputs("=", fp);
+      }
+      cnez_dump2(t->childs[i], fp);
+    }
+  }
+  fputs("]", fp);
+}
+
+static void cnez_dump3(void *v, FILE *fp)
 {
   size_t i;
   Tree *t = (Tree*)v;
@@ -1019,7 +1100,9 @@ void cnez_dump(void *v, FILE *fp)
 //		fprintf(fp, "@%ld", t->refc);
 //	}
   fputs("[#", fp);
+  if(t->tag!=NULL){
   fputs(t->tag, fp);
+}
   if(t->size == 0) {
     fputs(" '", fp);
     for(i = 0; i < t->len; i++) {
@@ -1029,17 +1112,58 @@ void cnez_dump(void *v, FILE *fp)
   }
   else {
     for(i = 0; i < t->size; i++) {
-      if(t->labels[i] != 0) {
+      if(t->labels[i] != NULL) {
         fputs("$", fp);
         fputs(t->labels[i], fp);
         fputs("=", fp);
       }
-      cnez_dump(t->childs[i], fp);
+      cnez_dump3(t->childs[i], fp);
     }
   }
   fputs("]\n", fp);
 }
 
+static void print_parse(ParserContext* pc){
+for(int i=0;i<pc->pos-pc->inputs;i++){
+printf("\x1b[34m");
+  printf("%c",pc->inputs[i]);
+}
+
+}
+//
+// static void cnez_dump2(void *v, FILE *fp)
+// {
+//   size_t i;
+//   Tree *t = (Tree*)v;
+//   if(t == NULL) {
+//     fputs("null", fp);
+//     return;
+//   }
+// //	if(t->refc != 1) {
+// //		fprintf(fp, "@%ld", t->refc);
+// //	}
+//   fputs("[#", fp);
+//   fputs(_tags[1], fp);
+//   if(t->size == 0) {
+//     fputs(" '", fp);
+//     for(i = 0; i < t->len; i++) {
+//       fputc(t->text[i], fp);
+//     }
+//     fputs("'", fp);
+//   }
+//   else {
+//     for(i = 0; i < t->size; i++) {
+//       fputs(" ", fp);
+//       if(t->labels[i] != 0) {
+//         fputs("$", fp);
+//         fputs(_labels[2], fp);
+//         fputs("=", fp);
+//       }
+//       cnez_dump(t->childs[i], fp);
+//     }
+//   }
+//   fputs("]", fp);
+// }
 // void initVM(ParserContext *pc){
 // pc->stacks[0].value=0
 // pc->stacks[1].value=pc->pos;

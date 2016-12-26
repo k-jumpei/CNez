@@ -10,77 +10,99 @@
 #define FAIL() goto L_fail
 #define Bottom -100 //Stackbottom//
 
-void prepare(Instruction *inst, Instruction* head) {
+size_t val;
+const unsigned char *text;
+int count=0;
+
+int main (int argc,char* argv[]){
+  VM_Context *vm_ctx= malloc(sizeof(*vm_ctx));
+  vm_ctx->instSize = 200;
+  char inputtext[20];
+
+  printf("Please input text.\n");
+  gets(inputtext);
+  text = inputtext;
+  vm_ctx->ctx= ParserContext_new(text,strlen(text));
+  initVM(vm_ctx->ctx);
+  parse(vm_ctx,argv[1]);
+
+
+}
+
+int prepare(Instruction *inst, Instruction* head,char* p) {
+  int instSize=0;
   inst=head-2;
   inst->op=False;
   inst++;
   inst->op=True;
   inst++;
-
-  inst->op=Pos;
-  inst++;
-  inst->op=Byte;
-  inst->arg=65;
-  inst++;
-  inst->op=RByte;
-  inst->arg=65;
-  inst++;
-  inst->op=SDef;
-  inst->arg=0;
-  inst++;
-  inst->op=Byte;
-  inst->arg=32;
-  inst++;
-  inst->op=RByte;
-  inst->arg=32;
-  inst++;
-  inst->op=Pos;
-  inst++;
-  inst->op=Byte;
-  inst->arg=65;
-  inst++;
-  inst->op=RByte;
-  inst->arg=65;
-  inst++;
-  inst->op=SDef;
-  inst->arg=0;
-  inst++;
-  inst->op=Byte;
-  inst->arg=32;
-  inst++;
-  inst->op=RByte;
-  inst->arg=32;
-  inst++;
-  inst->op=Pos;
-  inst++;
-  inst->op=Byte;
-  inst->arg=65;
-  inst++;
-  inst->op=RByte;
-  inst->arg=65;
-  inst++;
-  // inst->op=SIs;
+  instSize=loadinst(inst,p);
+  // inst->op=Pos;
+  // inst++;
+  // inst->op=Byte;
+  // inst->arg=65;
+  // inst++;
+  // inst->op=RByte;
+  // inst->arg=65;
+  // inst++;
+  // inst->op=SDef;
   // inst->arg=0;
   // inst++;
-  inst->op=SIsa;
-  inst->arg=0;
-  inst++;
-  inst->op=NAny;
-  inst++;
-
-  inst->op=Ret;
-  inst++;
+  // inst->op=Byte;
+  // inst->arg=32;
+  // inst++;
+  // inst->op=RByte;
+  // inst->arg=32;
+  // inst++;
+  // inst->op=Pos;
+  // inst++;
+  // inst->op=Byte;
+  // inst->arg=65;
+  // inst++;
+  // inst->op=RByte;
+  // inst->arg=65;
+  // inst++;
+  // inst->op=SDef;
+  // inst->arg=0;
+  // inst++;
+  // inst->op=Byte;
+  // inst->arg=32;
+  // inst++;
+  // inst->op=RByte;
+  // inst->arg=32;
+  // inst++;
+  // inst->op=Pos;
+  // inst++;
+  // inst->op=Byte;
+  // inst->arg=65;
+  // inst++;
+  // inst->op=RByte;
+  // inst->arg=65;
+  // inst++;
+  // // inst->op=SIs;
+  // // inst->arg=0;
+  // // inst++;
+  // inst->op=SIsa;
+  // inst->arg=0;
+  // inst++;
+  // inst->op=NAny;
+  // inst++;
+  //
+  // inst->op=Ret;
+  // inst++;
+  return instSize;
 }
 
-int parse(VM_Context *vm_ctx) {
-  Instruction* inst = vm_ctx->inst;
-  int instsSize = vm_ctx->instSize;
+int parse(VM_Context *vm_ctx,char* p) {
+  Instruction *inst = malloc(sizeof(*inst) * vm_ctx->instSize);
+
+  // inst = vm_ctx->inst;
+
   ParserContext *pc = vm_ctx->ctx;
   Instruction *head = inst;
+  int instsSize = prepare(inst, head,p);
+
   inst=head-1;
-
-  prepare(inst, head);
-
   for (int i = 0; i < instsSize; i++) {
 Jump:
     switch ((++inst)->op) {
@@ -246,6 +268,7 @@ Jump:
       {
         printf("TTag Success\n");
         ParserContext_tagTree(pc,tags[inst->arg]);
+
         // DEBUG_dumplog(pc);
 
 
@@ -339,7 +362,7 @@ Jump:
         s1->num=pc->pos-text;
         s2->value=ParserContext_saveLog(pc);
         s2->num=ParserContext_saveSymbolPoint(pc);
-        print_stack2(pc);
+        // print_stack2(pc);
         // Wstack *s0=unusedStack(pc);
         // s0->value=inst->arg;
         //
@@ -364,7 +387,7 @@ Jump:
 
 
         Wstack *s=popW(pc);
-        print_stack2(pc);
+        // print_stack2(pc);
 
         inst=head+s->value-2;
         NEXT;
@@ -373,6 +396,7 @@ Jump:
       LABEL(Pos){
         printf("Pos Success\n");
         push(pc,pc->pos-text);
+        printf("Pos Success\n");
         NEXT;
       }
       LABEL(Back){
@@ -407,7 +431,7 @@ Jump:
           printf("Step ");
           FAIL();
         }
-        print_stack2(pc);
+        // print_stack2(pc);
 
         s1->num=pc->pos-text;
         Wstack *s0=&(pc->stacks[pc->fail_stack]);
@@ -415,7 +439,7 @@ Jump:
         Wstack *s2=&(pc->stacks[pc->fail_stack+2]);
         s2->value=ParserContext_saveLog(pc);
         s2->num=ParserContext_saveSymbolPoint(pc);
-        print_stack2(pc);
+        // print_stack2(pc);
         NEXT;
 
 
@@ -428,11 +452,11 @@ Jump:
 
       } LABEL(SClose){
         printf("SClose Success\n");
-        print_stack2(pc);
+        // print_stack2(pc);
 
         Wstack *s=popW(pc);
         ParserContext_backSymbolPoint(pc,s->value);
-        print_stack2(pc);
+        // print_stack2(pc);
 
         NEXT;
       } LABEL(SDef){
@@ -441,13 +465,13 @@ Jump:
         NEXT;
       }  LABEL(SIs){
 
-        if(ParserContext_equals(pc,table[inst->arg],(popW(pc)->value)+text))
+        if(ParserContext_equals(pc,table2[inst->arg],(popW(pc)->value)+text))
         {printf("SIs Success\n");
          NEXT; }else {  printf("SIs");
                         FAIL(); }
       } LABEL(SIsa){
 
-        if(ParserContext_contains(pc,table[inst->arg],(popW(pc)->value)+text))
+        if(ParserContext_contains(pc,table2[inst->arg],(popW(pc)->value)+text))
         {  printf("SIsa Success\n");
            NEXT; }else {  printf("SIsa");
                           FAIL(); }
@@ -514,7 +538,7 @@ L_fail:;
   if(count==20) {
     exit(1);
   }
-  print_stack2(pc);
+  // print_stack2(pc);
   Wstack s0 = pc->stacks[pc->fail_stack];
   Wstack s1 = pc->stacks[pc->fail_stack+1];
   Wstack s2 = pc->stacks[pc->fail_stack+2];
@@ -538,17 +562,19 @@ L_fail:;
 }
 
 
-void print_stack(Wstack s){
-  printf("val=%d" "num=%d\n",s.value,s.num);
-
-}
-void print_stack2(ParserContext *pc){
-  for(int i=0; i<=pc->unused_stack; i++) {
-    printf("s[%d]",i);
-    print_stack(*(pc->stacks+i));
-  }
-}
+// void print_stack(Wstack s){
+//   printf("val=%d" "num=%d\n",s.value,s.num);
+//
+// }
+// void print_stack2(ParserContext *pc){
+//   for(int i=0; i<=pc->unused_stack; i++) {
+//     printf("s[%d]",i);
+//     print_stack(*(pc->stacks+i));
+//   }
+// }
 void initVM(ParserContext *pc){
+  ParserContext_initTreeFunc(pc,NULL,NULL,NULL,NULL);
+  ParserContext_initMemo(pc,10,5);
   pc->stacks[0].value=Bottom;
   pc->stacks[1].num=pc->pos-text;
   pc->stacks[1].value=-1;

@@ -1,5 +1,5 @@
-Ops = LABEL*  { $(Op) $(NL LABEL* Op)* #Ops }
-Op = { S+ $opname(Name) (_ $args(Args))? #Op }
+Ops = PRE*  { $(Op) $(NL LINE* Op)* #Ops }
+Op = {((!S $opname(LABEL))/(S* $opname(Name) (_ $args(Args))?)) #Op }
 /*Op=Matching/Basic/AST/Symbol/ReadRepeat/Memorization*/
 /*Basic={('nop'/'exit'/'alt'/'succ'/'jump'/'ret'/'back'/'pos'/'move'/'call'/'step'/'fail')#Basic}
 Matching = {('byte'/'nbyte'/'rbyte'/'obyte'/'set'/'rset'/'nset'/'oset'/'str'/'rstr'/'nstr'/'ostr'/'nany'/'any') #Matching}
@@ -7,7 +7,7 @@ AST={('tbegin'/'tend'/'ttag'/'tlink'/'treplace'/'tfold'/'tpush'/'tpop')#AST}
 Symbol={('sopen'/'sclose'/'sdef'/'sis'/'sisa'/'sexists'/'smask'/'smatch'/'sisdef')#Symbol}*/
 Name={[a-zA-Z]+}
 Args = {$arg(Arg) $arg(_ Arg)*}
-Arg = {[A-Za-z0-9#$_.~]+}
+Arg = '"'?{[A-Za-z0-9#$_.~)(-]+}'"'?
 /*Arg = Int/Line/String/Table/ Tag/Label*/
 /*Int = {[0-9]+ #Int}
 Line='L'{[0-9]+#Line}
@@ -20,4 +20,8 @@ S = [ \t]
 NL = '\n'
 _ = S*
 __ = (S / NL)*
-LABEL=[._a-zA-Z0-9~]+ NL
+/*LABEL=[._a-zA-Z0-9~]+ NL*/
+
+LINE='L'[?._a-zA-Z0-9~]+ NL
+LABEL={[?._a-zA-Z0-9~]+ #LABEL}
+PRE=[?._a-zA-Z0-9~]+ NL

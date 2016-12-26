@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,39 +6,43 @@
 #define UNUSE_MAIN 0
 
 
-
 static int _T = 0;
 static int _L = 0;
 static int _S = 0;
-static const unsigned char _set0[256] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-static const unsigned char _set1[256] = {0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+static const unsigned char _set0[256] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+static const unsigned char _index1[256] = {0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,2,0,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0,2,0,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+static const unsigned char _set2[256] = {0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 static int _Lopname = 1;
-static const unsigned char _set2[256] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+static const unsigned char _set3[256] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 static int _Largs = 2;
 static int _Larg = 3;
-static const unsigned char _set3[256] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-static int _TOp = 1;
-static int _TOps = 2;
-static const char * _tags[3] = {"","Op","Ops"};
-static const char * _labels[4] = {"","opname","args","arg"};
-static const char * _tables[1] = {""};
+static const unsigned char _set4[256] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+static int _TLABEL = 1;
+static int _TOp = 2;
+static int _TOps = 3;
 // Prototypes
-// { [#-$.0-9A-Z_a-z~]+ }
+// '"'? { [#-$(-)\--.0-9A-Z_a-z~]+ } '"'?
 static inline int pArg(ParserContext * c) {
+  if (ParserContext_prefetch(c) == 34) {
+    ParserContext_move(c,1);
+  }
   ParserContext_beginTree(c,0);
-  if (!_set3[ParserContext_read(c)]) {
+  if (!_set4[ParserContext_read(c)]) {
     return 0;
   }
-  while (_set3[ParserContext_prefetch(c)]) {
+  while (_set4[ParserContext_prefetch(c)]) {
     ParserContext_move(c,1);
   }
   ParserContext_endTree(c,0,_T,NULL, 0);
+  if (ParserContext_prefetch(c) == 34) {
+    ParserContext_move(c,1);
+  }
   return 1;
 }
 // $arg(([\t ]* Arg))
-static inline int e1(ParserContext * c) {
+static inline int e3(ParserContext * c) {
   size_t left = ParserContext_saveTree(c);
-  while (_set1[ParserContext_prefetch(c)]) {
+  while (_set2[ParserContext_prefetch(c)]) {
     ParserContext_move(c,1);
   }
   if (!pArg(c)) {
@@ -50,8 +53,8 @@ static inline int e1(ParserContext * c) {
   return 1;
 }
 // [\t ]* $args(({ $arg(Arg) ($arg(([\t ]* Arg)))* }))
-static inline int e0(ParserContext * c) {
-  while (_set1[ParserContext_prefetch(c)]) {
+static inline int e2(ParserContext * c) {
+  while (_set2[ParserContext_prefetch(c)]) {
     ParserContext_move(c,1);
   }
   {
@@ -70,7 +73,7 @@ static inline int e0(ParserContext * c) {
       size_t left3 = ParserContext_saveTree(c);
       size_t log = ParserContext_saveLog(c);
       // $arg(([\t ]* Arg))
-      if (!e1(c)) {
+      if (!e3(c)) {
         c->pos = pos;
         ParserContext_backTree(c,left3);
         ParserContext_backLog(c,log);
@@ -83,22 +86,18 @@ static inline int e0(ParserContext * c) {
   }
   return 1;
 }
-// { [\t ]+ $opname(({ [A-Za-z]+ })) ([\t ]* $args(({ $arg(Arg) ($arg(([\t ]* Arg)))* })))? #Op }
-static inline int pOp(ParserContext * c) {
-  ParserContext_beginTree(c,0);
-  if (!_set1[ParserContext_read(c)]) {
-    return 0;
-  }
-  while (_set1[ParserContext_prefetch(c)]) {
+// [\t ]* $opname(({ [A-Za-z]+ })) ([\t ]* $args(({ $arg(Arg) ($arg(([\t ]* Arg)))* })))?
+static inline int e1(ParserContext * c) {
+  while (_set2[ParserContext_prefetch(c)]) {
     ParserContext_move(c,1);
   }
   {
     size_t left = ParserContext_saveTree(c);
     ParserContext_beginTree(c,0);
-    if (!_set2[ParserContext_read(c)]) {
+    if (!_set3[ParserContext_read(c)]) {
       return 0;
     }
-    while (_set2[ParserContext_prefetch(c)]) {
+    while (_set3[ParserContext_prefetch(c)]) {
       ParserContext_move(c,1);
     }
     ParserContext_endTree(c,0,_T,NULL, 0);
@@ -109,16 +108,98 @@ static inline int pOp(ParserContext * c) {
   size_t left2 = ParserContext_saveTree(c);
   size_t log = ParserContext_saveLog(c);
   // [\t ]* $args(({ $arg(Arg) ($arg(([\t ]* Arg)))* }))
-  if (!e0(c)) {
+  if (!e2(c)) {
     c->pos = pos;
     ParserContext_backTree(c,left2);
     ParserContext_backLog(c,log);
   }
+  return 1;
+}
+// ![\t ] $opname(({ [.0-9?A-Z_a-z~]+ #LABEL }))
+static inline int e4(ParserContext * c) {
+  if (_set2[ParserContext_prefetch(c)]) {
+    return 0;
+  }
+  {
+    size_t left = ParserContext_saveTree(c);
+    ParserContext_beginTree(c,0);
+    if (!_set0[ParserContext_read(c)]) {
+      return 0;
+    }
+    while (_set0[ParserContext_prefetch(c)]) {
+      ParserContext_move(c,1);
+    }
+    ParserContext_endTree(c,0,_TLABEL,NULL, 0);
+    ParserContext_linkTree(c,_Lopname);
+    ParserContext_backTree(c,left);
+  }
+  return 1;
+}
+// ![\t ] $opname(({ [.0-9?A-Z_a-z~]+ #LABEL })) / [\t ]* $opname(({ [A-Za-z]+ })) ([\t ]* $args(({ $arg(Arg) ($arg(([\t ]* Arg)))* })))?
+static inline int e5(ParserContext * c) {
+  int temp = 1;
+  if (temp) {
+    const unsigned char * pos = c->pos;
+    size_t left = ParserContext_saveTree(c);
+    size_t log = ParserContext_saveLog(c);
+    // ![\t ] $opname(({ [.0-9?A-Z_a-z~]+ #LABEL }))
+    if (e4(c)) {
+      temp = 0;
+    } else {
+      c->pos = pos;
+      ParserContext_backTree(c,left);
+      ParserContext_backLog(c,log);
+    }
+  }
+  if (temp) {
+    const unsigned char * pos4 = c->pos;
+    size_t left5 = ParserContext_saveTree(c);
+    size_t log6 = ParserContext_saveLog(c);
+    // [\t ]* $opname(({ [A-Za-z]+ })) ([\t ]* $args(({ $arg(Arg) ($arg(([\t ]* Arg)))* })))?
+    if (e1(c)) {
+      temp = 0;
+    } else {
+      c->pos = pos4;
+      ParserContext_backTree(c,left5);
+      ParserContext_backLog(c,log6);
+    }
+  }
+  if (temp) {
+    return 0;
+  }
+  return 1;
+}
+// { ([\t ]* $opname(({ [A-Za-z]+ })) ([\t ]* $args(({ $arg(Arg) ($arg(([\t ]* Arg)))* })))? / ![\t ] $opname(({ [.0-9?A-Z_a-z~]+ #LABEL })) / (![\t ] $opname(({ [.0-9?A-Z_a-z~]+ #LABEL })) / [\t ]* $opname(({ [A-Za-z]+ })) ([\t ]* $args(({ $arg(Arg) ($arg(([\t ]* Arg)))* })))?)) #Op }
+static inline int pOp(ParserContext * c) {
+  ParserContext_beginTree(c,0);
+  int temp = 1;
+  switch(_index1[ParserContext_prefetch(c)]) {
+  case 0:
+    return 0;
+  case 1:
+    // [\t ]* $opname(({ [A-Za-z]+ })) ([\t ]* $args(({ $arg(Arg) ($arg(([\t ]* Arg)))* })))?
+    temp = e1(c);
+    break;
+  case 2:
+    // ![\t ] $opname(({ [.0-9?A-Z_a-z~]+ #LABEL }))
+    temp = e4(c);
+    break;
+  case 3:
+    // ![\t ] $opname(({ [.0-9?A-Z_a-z~]+ #LABEL })) / [\t ]* $opname(({ [A-Za-z]+ })) ([\t ]* $args(({ $arg(Arg) ($arg(([\t ]* Arg)))* })))?
+    temp = e5(c);
+    break;
+  }
+  if (!temp) {
+    return 0;
+  }
   ParserContext_endTree(c,0,_TOp,NULL, 0);
   return 1;
 }
-// [.0-9A-Z_a-z~]+ '\n'
-static inline int p_LABEL(ParserContext * c) {
+// 'L' [.0-9?A-Z_a-z~]+ '\n'
+static inline int e7(ParserContext * c) {
+  if (ParserContext_read(c) != 76) {
+    return 0;
+  }
   if (!_set0[ParserContext_read(c)]) {
     return 0;
   }
@@ -130,16 +211,16 @@ static inline int p_LABEL(ParserContext * c) {
   }
   return 1;
 }
-// $(('\n' ~LABEL* Op))
-static inline int e2(ParserContext * c) {
+// $(('\n' ('L' [.0-9?A-Z_a-z~]+ '\n')* Op))
+static inline int e6(ParserContext * c) {
   size_t left = ParserContext_saveTree(c);
   if (ParserContext_read(c) != 10) {
     return 0;
   }
   while (1) {
     const unsigned char * pos = c->pos;
-    // ~LABEL
-    if (!p_LABEL(c)) {
+    // 'L' [.0-9?A-Z_a-z~]+ '\n'
+    if (!e7(c)) {
       c->pos = pos;
       break;
     }
@@ -151,12 +232,25 @@ static inline int e2(ParserContext * c) {
   ParserContext_backTree(c,left);
   return 1;
 }
-// ~LABEL* { $(Op) ($(('\n' ~LABEL* Op)))* #Ops }
+// [.0-9?A-Z_a-z~]+ '\n'
+static inline int e0(ParserContext * c) {
+  if (!_set0[ParserContext_read(c)]) {
+    return 0;
+  }
+  while (_set0[ParserContext_prefetch(c)]) {
+    ParserContext_move(c,1);
+  }
+  if (ParserContext_read(c) != 10) {
+    return 0;
+  }
+  return 1;
+}
+// ([.0-9?A-Z_a-z~]+ '\n')* { $(Op) ($(('\n' ('L' [.0-9?A-Z_a-z~]+ '\n')* Op)))* #Ops }
 static inline int pOps(ParserContext * c) {
   while (1) {
     const unsigned char * pos = c->pos;
-    // ~LABEL
-    if (!p_LABEL(c)) {
+    // [.0-9?A-Z_a-z~]+ '\n'
+    if (!e0(c)) {
       c->pos = pos;
       break;
     }
@@ -174,8 +268,8 @@ static inline int pOps(ParserContext * c) {
     const unsigned char * pos2 = c->pos;
     size_t left3 = ParserContext_saveTree(c);
     size_t log = ParserContext_saveLog(c);
-    // $(('\n' ~LABEL* Op))
-    if (!e2(c)) {
+    // $(('\n' ('L' [.0-9?A-Z_a-z~]+ '\n')* Op))
+    if (!e6(c)) {
       c->pos = pos2;
       ParserContext_backTree(c,left3);
       ParserContext_backLog(c,log);
@@ -185,8 +279,6 @@ static inline int pOps(ParserContext * c) {
   ParserContext_endTree(c,0,_TOps,NULL, 0);
   return 1;
 }
-
-
 #ifndef UNUSE_MAIN
 #include <sys/time.h> // for using gettimeofday
 

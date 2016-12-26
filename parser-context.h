@@ -20,6 +20,8 @@ typedef struct ParserContext {
   size_t unused_log;
   // stack
   struct Wstack  *stacks;
+
+
   size_t stack_size;
   size_t unused_stack;
   size_t fail_stack;
