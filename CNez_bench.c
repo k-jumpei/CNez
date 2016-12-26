@@ -24,7 +24,7 @@ void print_stack(Wstack s);
 void print_stack2(ParserContext *pc);
 
 int main (int argc,char* argv[]){
-  char inputtext[1024];
+  char inputtext[30000];
   clock_t start, end;
   clock_t Time[5];
 
@@ -88,7 +88,7 @@ int prepare(Instruction *inst, Instruction* head,char* p) {
 }
 
 int parse(VM_Context *vm_ctx,char* p) {
-  Instruction *inst = malloc(sizeof(*inst) * 1000);
+  Instruction *inst = malloc(sizeof(*inst) * 2000);
 
   // cnez_dump(vm_ctx->ctx->left, stdout);
   ParserContext *pc = vm_ctx->ctx;
@@ -97,7 +97,7 @@ int parse(VM_Context *vm_ctx,char* p) {
   int instsSize = prepare(inst, head,p);
 
   inst=head-1;
-  for (int i = 0; i < 6000; i++) {
+  for (int i = 0; i < 60000; i++) {
 Jump:
     switch ((++inst)->op) {
       LABEL(Byte) {
@@ -566,7 +566,7 @@ void print_stack2(ParserContext *pc){
 }
 void initVM(ParserContext *pc){
   ParserContext_initTreeFunc(pc,NULL,NULL,NULL,NULL);
-  ParserContext_initMemo(pc,32,32);
+  ParserContext_initMemo(pc,256,256);
   pc->stacks[0].value=Bottom;
   pc->stacks[1].num=pc->pos-text;
   pc->stacks[1].value=-1;

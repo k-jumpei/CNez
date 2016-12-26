@@ -318,7 +318,7 @@ static ParserContext *ParserContext_new(const unsigned char *text, size_t len)
   c->logs = (struct TreeLog*) _calloc(c->log_size, sizeof(struct TreeLog));
   c->unused_log = 0;
   // stack
-  c->stack_size = 256;
+  c->stack_size = 4096;
   c->stacks = (struct Wstack*) _calloc(c->stack_size, sizeof(struct Wstack));
   c->unused_stack = 0;
   c->fail_stack   = 0;
