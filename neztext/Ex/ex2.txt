@@ -1,0 +1,29 @@
+Name
+	alt L8
+	tbegin 0
+	str "var"
+	rstr "var"
+	tend 0 #Var null
+	succ
+	ret
+L8
+	alt L14
+	tbegin 0
+	byte 99
+	rbyte 99
+	tend 0 #Int null
+	succ
+	jump L7
+L14
+	alt L17
+	str "true"
+	succ
+	jump L7
+L17
+	alt L20
+	str "false"
+	succ
+	jump L7
+L20
+	rstr "bool"
+	jump L7

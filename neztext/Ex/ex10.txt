@@ -1,0 +1,24 @@
+Calc
+	call L2 Num
+	jump L13
+L2
+	alt L11
+	byte 43
+	tfold -1 $left
+	ttag #Add
+	tpush
+	call L8 Num
+	jump L12
+L8
+	tlink $right
+	tend 0 null null
+	step
+	jump L3
+L11
+	ret
+Num
+L13
+	tbegin 0
+	rbyte 49
+	tend 0 #Int null
+	ret

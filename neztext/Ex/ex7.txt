@@ -1,0 +1,18 @@
+File
+	tbegin 0
+	pos
+	byte 97
+	rbyte 97
+	sdef T1
+	pos
+	rbyte 98
+	sdef T2
+	alt L13
+	sexists T1
+	succ
+	fail
+L13
+	sexists T2
+	byte 99
+	tend 0 #File null
+	ret

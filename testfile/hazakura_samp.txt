@@ -1,0 +1,11 @@
+func=f(x,y,z)->x+y+z(x>2||z>2)
+               x*y+z(x>=2&&z<=2)
+               x*y*z(otherwise)
+
+y=true
+
+x=false
+
+func=f(x,y,z)->x+y+z (x>2||z>2)
+
+func=f(x,y)->x*y

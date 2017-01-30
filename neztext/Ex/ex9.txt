@@ -1,0 +1,29 @@
+_0.START
+	alt L6
+L2
+	pos
+	call L4 _0.NAME
+	jump L8
+L4
+	sdef NAME
+	step
+	jump L2
+L6
+	sisdef NAME "bb"
+	ret
+_0.NAME
+	alt L13
+	byte 97
+	succ
+	ret
+L13
+	alt L17
+	byte 98
+	byte 98
+	succ
+	jump L12
+L17
+	byte 99
+	byte 99
+	byte 99
+	jump L12

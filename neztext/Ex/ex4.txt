@@ -1,0 +1,20 @@
+A
+	tbegin 0
+	tpush
+	str "Byte"
+	tbegin -4
+	tend 0 #Byte null
+	tlink $left
+	byte 32
+	tpush
+	tbegin 0
+	alt L17
+	str "47"
+	succ
+	tend 0 #Num null
+	tlink $right
+	tend 0 #Start null
+	ret
+L17
+	str "48"
+	jump L13

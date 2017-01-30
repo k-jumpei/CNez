@@ -1,0 +1,19 @@
+START
+	pos
+	byte 65
+	rbyte 65
+	sdef NAME
+	byte 32
+	rbyte 32
+	pos
+	byte 65
+	rbyte 65
+	sdef NAME
+	byte 32
+	rbyte 32
+	pos
+	byte 65
+	rbyte 65
+	sisa NAME
+	nany
+	ret

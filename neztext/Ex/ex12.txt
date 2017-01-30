@@ -1,0 +1,21 @@
+Calc
+	tlookup L26 0
+	alt L27
+	call L4 _0.Num
+	jump L29
+L4
+	alt L25
+L5
+	tfold 0 $left
+	alt L15
+	byte 43
+	ttag #Add
+	succ
+	tpush
+	call L12 _0.Num
+	jump L29
+L12
+	tlink $right
+	tend 0 null null
+	step
+	jump L5

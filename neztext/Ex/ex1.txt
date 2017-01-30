@@ -1,0 +1,22 @@
+B
+	alt L5
+	str "(bool)"
+	succ
+	ret
+L5
+	alt L8
+	str "true"
+	succ
+	jump L4
+L8
+	alt L15
+	str "false"
+	rstr "false"
+	str "bad"
+	rstr "bad"
+	str "abc"
+	succ
+	jump L4
+L15
+	str "good"
+	jump L4

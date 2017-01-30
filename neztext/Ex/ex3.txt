@@ -1,0 +1,31 @@
+Calc
+	call L2 Int
+	jump L18
+L2
+	alt L15
+	tfold 0 $left
+	alt L13
+	byte 42
+	ttag #Mul
+	succ
+	tpush
+	call L10 Int
+	jump L18
+L10
+	tlink $right
+	tend 0 null null
+	step
+	jump L3
+L13
+	byte 47
+	ttag #Div
+	jump L8
+L15
+	byte 97
+	ret
+Int
+L18
+	byte 49
+	tbegin -1
+	tend 0 #Int null
+	ret

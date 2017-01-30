@@ -1,0 +1,20 @@
+START
+	pos
+	alt L11
+	str "Apple"
+	succ
+	sdef NAME
+	byte 32
+	alt L10
+	smatch NAME
+	succ
+L10
+	ret
+L11
+	alt L14
+	str "Apple2"
+	succ
+	jump L5
+L14
+	str "Banana"
+	jump L5

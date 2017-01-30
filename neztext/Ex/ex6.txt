@@ -1,0 +1,14 @@
+File
+	tbegin 0
+	pos
+	byte 97
+	rbyte 97
+	sdef T1
+	pos
+	rbyte 98
+	sdef T2
+	sexists T1
+	sexists T2
+	byte 99
+	tend 0 #File null
+	ret

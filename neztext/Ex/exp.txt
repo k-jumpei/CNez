@@ -1,0 +1,49 @@
+ex.txt
+B= 'bool'/'true' / 'false'+'bad'+'abc'/'good'
+
+ex2.txt
+Name=Var/Int/B
+Int ={('c')+ #Int}
+Var={'var'+#Var}
+B= 'true' / 'false'/'bool'*
+
+ex3.txt
+Calc = (Int){$left  op  $right(Int)}*'a'
+op='*' #Mul /'/' #Div
+Int ={('1')#Int}
+
+
+ex4.txt
+A = { $left({'Byte' #Byte }) ' ' $right({('47'/'48') #Num }) #Start }
+
+ex5.txt
+START = <symbol NAME> S <symbol NAME>S<isa NAME> !.
+NAME = 'A'+
+S = [ ]+
+
+ex6.txt
+File =  {<symbol T1> <symbol T2 > <exists T1 > <exists T2> 'c' #File}
+T1 = 'a'+
+T2 = 'b'*
+
+ex7.txt
+File = { <symbol T1> <symbol T2 > !<exists T1 > <exists T2> 'c' #File}
+T1 = 'a'+
+T2 = 'b'*
+
+ex8.txt
+START = <symbol NAME> S <match NAME>?
+NAME = 'Apple'/'Apple2'/'Banana'
+S =[ ]
+
+ex9.txt
+START = (<symbol NAME>)*<exists NAME 'bb'>
+NAME = 'a'/'bb'/'ccc'
+
+ex10.txt
+Calc= Num{$left ( '+' #Add )  $right(Num) }*
+Num= { '1'* #Int }
+
+ex11.txt
+Calc= Num{$left ( '+' #Add /'-' #Min/'*' #Pro/'/' #Div)  $right(Num) }*
+Num= { [1-9][0-9]* #Int }
