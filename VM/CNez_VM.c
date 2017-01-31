@@ -20,7 +20,7 @@ void print_stack(Wstack s);
 void print_stack2(ParserContext *pc);
 
 int main (int argc,char* argv[]){
-  printf("A\n");
+
   char inputtext[3000000];
   FILE *fp;
   fp=fopen(argv[2],"r");
@@ -40,7 +40,6 @@ int main (int argc,char* argv[]){
   // printf("Please input text.\n");
   // fgets(inputtext,sizeof(inputtext),stdin);
   text = inputtext;
-  printf("A\n");
   vm_ctx->ctx= ParserContext_new(text,strlen(text));
   initVM(vm_ctx->ctx);
   parse(vm_ctx,argv[1]);
@@ -228,11 +227,11 @@ Jump:
 
         if(inst->arg!=-1) {
           ParserContext_endTree(pc,work,tags[inst->arg],NULL,0);
-          cnez_dump3(pc->left, stdout);
+          // cnez_dump3(pc->left, stdout);
 
         }else{
           ParserContext_endTree(pc,work,NULL,NULL,0);
-          cnez_dump3(pc->left, stdout);
+          // cnez_dump3(pc->left, stdout);
 
         }
 
