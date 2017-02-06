@@ -34,7 +34,7 @@ int main (int argc,char* argv[]){
          }}
 
   fclose(fp);
-  printf("%s",inputtext);
+  // printf("%s",inputtext);
   VM_Context *vm_ctx= malloc((sizeof(*vm_ctx)));
 
   // printf("Please input text.\n");
